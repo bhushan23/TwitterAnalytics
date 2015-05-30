@@ -2,7 +2,8 @@ import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import re
-
+from textblob import TextBlob
+import unicodedata
 def word_in_text(word, text):
     word = word.lower()
     text = text.lower()
@@ -31,3 +32,5 @@ tweets['country']=map(lambda tweet:tweet['place']['country'] if tweet['place']!=
 
 for i in tweets['text']:
 	print i
+	tb = TextBlob(unicodedata.normalize('NFKD', i).encode('ascii','ignore'))
+	print(tb.sentiment)
